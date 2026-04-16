@@ -1,0 +1,153 @@
+{
+  "nav": {
+    "home": "Home",
+    "founders": "Founders",
+    "services": "Services",
+    "work": "Work & Insights",
+    "insights": "Insights",
+    "careers": "Careers",
+    "newsletter": "Newsletter",
+    "contact": "Get in Touch",
+    "claim_cta": "Claim Free Website",
+    "skip_to_content": "Skip to content"
+  },
+  "hero": {
+    "badge": "Global Digital Growth Studio",
+    "headline_before": "A GLOBAL",
+    "headline_accent": "DIGITAL GROWTH STUDIO",
+    "tagline": "A Global Digital Growth Studio",
+    "subtitle": "Built by builders, not suits. We help businesses get found, get followed, and grow — starting with a free website, no strings attached.",
+    "cta": "Claim Your Free Website",
+    "secondary_cta": "See What We Do"
+  },
+  "services": {
+    "heading_prefix": "SERVICES.",
+    "heading_suffix": "ONE GOAL.",
+    "subtitle": "Make your business the obvious choice online."
+  },
+  "testimonials": {
+    "heading": "What Our Clients Say",
+    "subtitle": "Real feedback from real businesses we've helped grow."
+  },
+  "contact": {
+    "heading": "LET'S SEE WHERE YOU STAND",
+    "subtitle": "Free, No Obligation. No pitch deck. No pressure. Just a straight answer.",
+    "card_title": "Request a Free Audit",
+    "card_description": "Fill in your details and we'll audit your current digital presence and tell you exactly what's working, what isn't, and what we'd do first.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "business": "Business Name",
+    "business_type": "Business Type",
+    "website": "Website (Optional)",
+    "message": "Message",
+    "message_placeholder": "Tell us about your current challenges...",
+    "submit": "Submit Request",
+    "submitting": "Submitting...",
+    "success_title": "Thank You!",
+    "success_line1": "We've received your request.",
+    "success_line2": "We'll audit your digital presence and get back to you within 24 hours.",
+    "success_again": "Submit Another Request",
+    "error": "Something went wrong.",
+    "onboarding_note": "We're currently onboarding businesses worldwide. If that's you — let's talk."
+  },
+  "footer": {
+    "tagline": "A global digital growth studio. Built by builders, not suits.",
+    "copyright": "All rights reserved.",
+    "navigate": "Navigate",
+    "contact": "Contact",
+    "quick_connect": "Quick Connect",
+    "chat_whatsapp": "Chat on WhatsApp",
+    "whatsapp_note": "We typically respond within a few hours.",
+    "back_to_top": "Back to top",
+    "location": "Worldwide — Remote First"
+  },
+  "insights": {
+    "heading": "Insights",
+    "subtitle": "Actionable strategies, honest takes, and lessons from the trenches of digital growth.",
+    "read_more": "Read More",
+    "all_tags": "All",
+    "no_results": "No articles found for this tag.",
+    "related": "Related Insights",
+    "back": "Back to Insights"
+  },
+  "careers": {
+    "heading": "Join Our Team",
+    "subtitle": "We're building something different. If you're driven, creative, and ready to make an impact — we want to hear from you.",
+    "apply": "Apply Now",
+    "no_openings": "No openings right now — but we're always looking for great people."
+  },
+  "newsletter": {
+    "heading": "Stay in the Loop",
+    "subtitle": "No spam. Just real growth strategies, case studies, and insights — delivered to your inbox.",
+    "placeholder": "your@email.com",
+    "subscribe": "Subscribe",
+    "success": "You're in! Check your inbox."
+  },
+  "claim": {
+    "badge": "Limited — 5 Slots",
+    "headline_before": "CLAIM YOUR",
+    "headline_accent": "FREE WEBSITE",
+    "intro": "We're building five free websites for early clients to start our portfolio. No strings. No upsells. No catches. If your business fits, it's yours.",
+    "benefit_1": "Custom-designed, not a template",
+    "benefit_2": "Mobile-first, loads in under 2 seconds",
+    "benefit_3": "Basic SEO + Google Business setup",
+    "benefit_4": "Delivered in 2—3 weeks",
+    "benefit_5": "You own everything, no lock-in",
+    "card_title": "Tell Us About Your Business",
+    "card_description": "Takes 60 seconds. We'll reach out within 24 hours to confirm fit.",
+    "name": "Your Name",
+    "phone": "Phone",
+    "business": "Business Name",
+    "business_type": "Business Type",
+    "email_optional": "Email (Optional)",
+    "notes_optional": "Anything else? (Optional)",
+    "submit": "Claim My Free Website",
+    "submitting": "Claiming…",
+    "consent": "By submitting, you agree to be contacted about this request. No spam, ever.",
+    "success_title": "You're In The Queue",
+    "success_line1": "We've received your claim.",
+    "success_line2": "Expect a WhatsApp or call from us within 24 hours to confirm fit and start the build.",
+    "back_home": "Back to Home"
+  },
+  "notFound": {
+    "code": "404",
+    "heading": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "cta": "Back to Home"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "language": "Language"
+  },
+  "faq": {
+    "heading": "Straight Answers",
+    "subtitle": "The questions every business owner asks before talking to us.",
+    "q1": "What&rsquo;s the catch with the free website?",
+    "a1": "There is none. We&rsquo;re building five free websites for early clients to establish our portfolio. No hidden fees, no upsells, no lock-in.",
+    "q2": "Who owns the website when you&rsquo;re done?",
+    "a2": "You do — fully. All source code, content, images, and domain access transfer to you on delivery. We don&rsquo;t hold anything hostage.",
+    "q3": "How long does it take to build?",
+    "a3": "Typically 2&ndash;3 weeks from the moment we align on design direction. We move fast because speed matters for a young business.",
+    "q4": "What if I want changes later?",
+    "a4": "Small content edits are easy — we&rsquo;ll show you how. For larger changes, we offer monthly retainer plans, but you&rsquo;re never obligated.",
+    "q5": "Do I need to know anything technical?",
+    "a5": "No. We handle domains, hosting, SSL, SEO setup, and Google Business — everything. You focus on your business; we handle the digital side.",
+    "q6": "Why only five free clients?",
+    "a6": "Because we give each build full attention. Once the first five case studies are live, pricing returns to normal. First come, first served."
+  },
+  "careers_teaser": {
+    "badge": "We&rsquo;re Hiring",
+    "heading_before": "Build the future",
+    "heading_accent": "with us.",
+    "description": "We&rsquo;re a young studio with big ambitions. If you care about craft and growth, we want to hear from you.",
+    "cta": "View All Roles",
+    "apply": "Apply"
+  },
+  "sticky_cta": {
+    "title": "Still deciding? Claim a free website.",
+    "subtitle": "Only 5 slots — first come, first served.",
+    "button": "Claim"
+  }
+}
