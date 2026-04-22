@@ -207,6 +207,9 @@ export default function Home() {
     }
   };
 
+  const wordMap = ['ZERO','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','TEN'];
+  const countWord = wordMap[services.length] ?? services.length.toString();
+
   return (
     <main ref={container} className="min-h-screen bg-[#0A0F1C] text-zinc-50 overflow-hidden">
 
@@ -222,16 +225,16 @@ export default function Home() {
             </span>
             {tHero('badge')}
           </div>
-          <h1 ref={heroTextRef} className="hero-headline opacity-0 font-epilogue text-3xl sm:text-5xl md:text-7xl lg:text-8xl 2xl:text-9xl 3xl:text-[11rem] 4xl:text-[14rem] font-bold tracking-tighter leading-[1.1] mb-6 sm:mb-8">
+          <h1 ref={heroTextRef} className="hero-headline font-epilogue text-3xl sm:text-5xl md:text-7xl lg:text-8xl 2xl:text-9xl 3xl:text-[11rem] 4xl:text-[14rem] font-bold tracking-tighter leading-[1.1] mb-6 sm:mb-8">
             {tHero('headline_before')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2A8B9D] via-[#C87A4F] to-[#2A8B9D]">
               {tHero('headline_accent')}
             </span>
           </h1>
-          <p ref={heroSubRef} className="hero-subtitle opacity-0 text-base sm:text-xl md:text-2xl 2xl:text-3xl 3xl:text-4xl text-zinc-200 max-w-3xl 2xl:max-w-4xl 3xl:max-w-5xl mx-auto font-light mb-8 sm:mb-12 drop-shadow-sm">
+          <p ref={heroSubRef} className="hero-subtitle text-base sm:text-xl md:text-2xl 2xl:text-3xl 3xl:text-4xl text-zinc-200 max-w-3xl 2xl:max-w-4xl 3xl:max-w-5xl mx-auto font-light mb-8 sm:mb-12 drop-shadow-sm">
             {tHero('subtitle')}
           </p>
-          <div ref={heroCtaRef} className="opacity-0 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <div ref={heroCtaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             <Button
               onClick={() => { events.heroCtaClick(); router.push('/claim'); }}
               className="group relative rounded-full px-6 sm:px-8 py-5 sm:py-6 text-sm sm:text-[15px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#C87A4F] via-[#e08a5c] to-[#C87A4F] bg-[length:200%_auto] hover:bg-[position:right_center] text-white transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_-5px_rgba(200,122,79,0.6)] w-full sm:w-auto overflow-hidden"
@@ -279,7 +282,7 @@ export default function Home() {
         <div className="max-w-7xl 2xl:max-w-screen-2xl 3xl:max-w-[1800px] mx-auto">
           <div className="text-center mb-14 sm:mb-20">
             <h2 className="font-epilogue text-3xl sm:text-4xl md:text-6xl 2xl:text-7xl font-bold tracking-tighter mb-4 sm:mb-6">
-              {['ZERO','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','TEN'][services.length] || services.length} {tServices('heading_prefix')} <span className="text-[#C87A4F]">{tServices('heading_suffix')}</span>
+              {countWord} {tServices('heading_prefix')} <span className="text-[#C87A4F]">{tServices('heading_suffix')}</span>
             </h2>
             <p className="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto">
               {tServices('subtitle')}
@@ -302,7 +305,7 @@ export default function Home() {
       <TestimonialsSection />
 
       {/* Work & Insights Section */}
-      <section id="work" className="py-24 sm:py-32 3xl:py-40 px-4 sm:px-8 bg-zinc-950 relative overflow-hidden">
+      <section id="work" className="py-24 sm:py-32 3xl:py-40 px-4 sm:px-8 bg-zinc-900/40 relative overflow-hidden">
         <div className="max-w-7xl 2xl:max-w-screen-2xl 3xl:max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16">
           {/* Work */}
           <div>
@@ -425,24 +428,31 @@ export default function Home() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="businessType" className="text-zinc-300">Business Type</Label>
-                      <select
-                        id="businessType"
-                        name="businessType"
-                        defaultValue=""
-                        className="flex h-10 w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A8B9D] focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
-                      >
-                        <option value="" disabled>Select your business type</option>
-                        <option value="retail">Retail</option>
-                        <option value="food_beverage">Food & Beverage</option>
-                        <option value="professional_services">Professional Services</option>
-                        <option value="healthcare">Healthcare</option>
-                        <option value="education">Education</option>
-                        <option value="real_estate">Real Estate</option>
-                        <option value="salon_beauty">Salon & Beauty</option>
-                        <option value="automotive">Automotive</option>
-                        <option value="hospitality">Hospitality</option>
-                        <option value="other">Other (Please specify in message)</option>
-                      </select>
+                      <div className="relative">
+                        <select
+                          id="businessType"
+                          name="businessType"
+                          defaultValue=""
+                          className="flex h-10 w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 pr-9 text-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A8B9D] focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
+                        >
+                          <option value="" disabled>Select your business type</option>
+                          <option value="retail">Retail</option>
+                          <option value="food_beverage">Food & Beverage</option>
+                          <option value="professional_services">Professional Services</option>
+                          <option value="healthcare">Healthcare</option>
+                          <option value="education">Education</option>
+                          <option value="real_estate">Real Estate</option>
+                          <option value="salon_beauty">Salon & Beauty</option>
+                          <option value="automotive">Automotive</option>
+                          <option value="hospitality">Hospitality</option>
+                          <option value="other">Other (Please specify in message)</option>
+                        </select>
+                        <ChevronDown
+                          size={16}
+                          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400"
+                          aria-hidden="true"
+                        />
+                      </div>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email" className="text-zinc-300">Email <span className="text-red-400">*</span></Label>

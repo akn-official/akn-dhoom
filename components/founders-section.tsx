@@ -232,7 +232,7 @@ export function FoundersSection() {
   }, { scope: container });
 
   return (
-    <div ref={container} className="relative w-full bg-zinc-950">
+    <div ref={container} className="relative w-full bg-[#0D1320]">
       <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-8 py-16 sm:py-24">
         <div className="mb-16 sm:mb-32 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
@@ -250,7 +250,7 @@ export function FoundersSection() {
 
         <div className="flex flex-col gap-16 sm:gap-32">
           {founders.map((founder, index) => (
-            <div key={founder.id} className="founder-section group relative grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 md:min-h-[80vh]">
+            <div key={founder.id} className="founder-section group relative grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 md:min-h-[40vh]">
               <div className={`h-full ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
                 <div className="image-container relative aspect-square sm:aspect-[3/4] w-full max-w-sm sm:max-w-md mx-auto overflow-hidden rounded-2xl bg-zinc-900">
                   <Image

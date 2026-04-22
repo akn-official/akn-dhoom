@@ -2,7 +2,6 @@
 
 import { forwardRef, useRef, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 
@@ -71,17 +70,20 @@ export const ServiceCard = forwardRef<HTMLDivElement, ServiceCardProps>(({ servi
         aria-label={`${service.title} - click to ${isExpanded ? 'collapse' : 'expand'} details`}
         className="relative bg-zinc-900/50 border-zinc-800 hover:border-[#2A8B9D] transition-colors group backdrop-blur-sm overflow-hidden h-full cursor-pointer flex flex-col"
       >
-        {/* Background Image with Parallax */}
+        {/* Branded gradient background with Parallax */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <motion.div
             className="absolute inset-[-20%] w-[140%] h-[140%]"
             style={{ x, y }}
           >
-            <Image
-              src={`https://picsum.photos/seed/service${index}/800/600`}
-              alt="Service Background"
-              fill
-              className="object-cover opacity-10 group-hover:opacity-30 transition-opacity duration-500 grayscale group-hover:grayscale-0 mix-blend-overlay"
+            <div
+              className={`absolute inset-0 ${
+                index % 3 === 0
+                  ? 'bg-gradient-to-br from-[#2A8B9D]/20 to-transparent'
+                  : index % 3 === 1
+                  ? 'bg-gradient-to-tl from-[#C87A4F]/20 to-transparent'
+                  : 'bg-gradient-to-b from-[#2A8B9D]/10 via-[#C87A4F]/10 to-transparent'
+              }`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 to-transparent" />
           </motion.div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { X } from 'lucide-react';
 
@@ -15,12 +15,21 @@ const DEFAULT_MESSAGE = encodeURIComponent(
 export function FloatingWhatsApp() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [stickyActive, setStickyActive] = useState(false);
+
+  useEffect(() => {
+    // Mirror StickyCta's 80vh threshold so the two never overlap on mobile
+    const onScroll = () => setStickyActive(window.scrollY > window.innerHeight * 0.8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Hide on admin pages
   if (pathname.startsWith('/admin')) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className={`fixed bottom-6 right-6 z-50 flex-col items-end gap-3 ${stickyActive ? 'hidden sm:flex' : 'flex'}`}>
       {/* Number options */}
       {open && (
         <div className="flex flex-col gap-2 animate-[fadeInUp_0.2s_ease-out]">

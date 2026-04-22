@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const trustPoints = [
   {
     icon: Zap,
+    // TODO: Pull slot count from Supabase settings table
     value: '5 Slots',
     label: 'Free websites left',
     accent: '#C87A4F',
