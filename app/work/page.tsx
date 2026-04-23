@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { createServerSupabase } from '@/lib/supabase/server';
 import { WorkPageContent } from './content';
-import { ComingSoonPage } from '@/components/coming-soon-page';
 import type { Work } from '@/lib/supabase/types';
 
 export const metadata: Metadata = {
@@ -27,19 +26,7 @@ export default async function WorkPage() {
       .order('display_order', { ascending: true });
     works = data || [];
   } catch {
-    // Supabase not configured yet — fall through to coming-soon
-  }
-
-  if (works.length === 0) {
-    return (
-      <ComingSoonPage
-        label="Portfolio"
-        heading="Our Work."
-        headingAccent="Coming Into Focus."
-        description="We launched in April 2025. Our first projects are underway. This page will be home to real results, real clients, and real before-and-afters — updated as we deliver."
-        accentColor="teal"
-      />
-    );
+    // Supabase not configured yet — render with empty works; component handles it.
   }
 
   return <WorkPageContent works={works} />;
