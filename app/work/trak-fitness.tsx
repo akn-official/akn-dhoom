@@ -1,19 +1,19 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'motion/react';
+import { motion, useInView } from 'motion/react';
 
 /* ─── Design tokens ─────────────────────────────────────────── */
-const BG    = '#0A0A0A';
-const BG1   = '#111111';
-const BG2   = '#161616';
-const LINE  = '#1f1f1f';
-const LINE2 = '#2a2a2a';
-const INK   = '#F5F3EE';
-const DIM   = '#8a8a85';
-const FAINT = '#5a5a55';
-const LIME  = '#D4FF3A';
-const LIME2 = '#A8D42A';
+const BG    = '#0D0608';
+const BG1   = '#160b0f';
+const BG2   = '#1d1018';
+const LINE  = '#2a1219';
+const LINE2 = '#3d1c26';
+const INK   = '#F5EFE4';
+const DIM   = '#a88090';
+const FAINT = '#6d4d58';
+const LIME  = '#9B2335';
+const LIME2 = '#B83048';
 
 const DISPLAY = "var(--font-trak-display, 'Anton', Impact, sans-serif)";
 const MONO    = "var(--font-portfolio-mono, 'JetBrains Mono', monospace)";
@@ -60,13 +60,13 @@ function TrakNav() {
       position: 'sticky', top: 0, zIndex: 50,
       padding: scrolled ? '14px 48px' : '20px 48px',
       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-      background: scrolled ? 'rgba(10,10,10,0.88)' : 'transparent',
+      background: scrolled ? 'rgba(13,6,8,0.92)' : 'transparent',
       backdropFilter: scrolled ? 'blur(20px)' : 'none',
       borderBottom: scrolled ? `1px solid ${LINE}` : 'none',
       transition: 'all 0.35s ease',
     }}>
       <div style={{ fontFamily: DISPLAY, fontSize: 22, letterSpacing: '0.04em', display: 'flex', alignItems: 'center', gap: 10 }}>
-        <span style={{ width: 10, height: 10, borderRadius: '50%', background: LIME, boxShadow: `0 0 20px ${LIME}`, display: 'inline-block' }} />
+        <span style={{ width: 10, height: 10, borderRadius: '50%', background: LIME, boxShadow: `0 0 20px ${LIME}60`, display: 'inline-block' }} />
         Trak<span style={{ color: LIME }}>/</span>Fitness
       </div>
       <div style={{ display: 'flex', gap: 28 }}>
@@ -74,7 +74,7 @@ function TrakNav() {
           <span key={l} style={{ fontFamily: MONO, fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', color: DIM, cursor: 'pointer' }}>{l}</span>
         ))}
       </div>
-      <div style={{ fontFamily: MONO, fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', padding: '10px 18px', background: LIME, color: BG, fontWeight: 600, cursor: 'pointer' }}>
+      <div style={{ fontFamily: MONO, fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', padding: '10px 18px', background: LIME, color: INK, fontWeight: 600, cursor: 'pointer' }}>
         Book a Visit →
       </div>
     </nav>
@@ -90,7 +90,7 @@ function UrgencyBar() {
         <>Next intake starts <strong>Monday</strong></>,
         <>5.0 ★ · 468 members</>,
       ].map((item, i) => (
-        <span key={i} style={{ fontFamily: MONO, fontSize: 11, color: BG, letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span key={i} style={{ fontFamily: MONO, fontSize: 11, color: INK, letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: 6 }}>
           {item}
         </span>
       ))}
@@ -102,12 +102,13 @@ function UrgencyBar() {
 function TrakHero() {
   const words = ['Not a gym.', 'A guided', 'transformation', 'system.'];
   return (
-    <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'clamp(80px,10vw,140px) clamp(24px,4vw,48px) clamp(60px,8vw,100px)', position: 'relative', overflow: 'hidden' }}>
-      {/* Ambient glow */}
-      <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 600, height: 600, borderRadius: '50%', background: `radial-gradient(circle, ${LIME}0D 0%, transparent 70%)`, pointerEvents: 'none' }} />
+    <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: 'clamp(80px,10vw,140px) clamp(24px,4vw,48px) clamp(60px,8vw,100px)', position: 'relative', overflow: 'hidden' }}>
+      {/* Ambient glows */}
+      <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 600, height: 600, borderRadius: '50%', background: `radial-gradient(circle, ${LIME}18 0%, transparent 70%)`, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '-10%', left: '-5%', width: 500, height: 500, borderRadius: '50%', background: `radial-gradient(circle, ${LIME}10 0%, transparent 70%)`, pointerEvents: 'none' }} />
 
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-        style={{ fontFamily: MONO, fontSize: 11, letterSpacing: '0.2em', color: DIM, marginBottom: 36, display: 'flex', alignItems: 'center', gap: 14 }}>
+        style={{ fontFamily: MONO, fontSize: 11, letterSpacing: '0.2em', color: DIM, marginBottom: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14 }}>
         <span style={{ width: 7, height: 7, borderRadius: '50%', background: LIME, display: 'inline-block', animation: 'trakPulse 2s ease-in-out infinite' }} />
         Chennai&apos;s Highest-Rated Coaching Gym · ★★★★★ 468 members · 5.0
       </motion.div>
@@ -126,19 +127,19 @@ function TrakHero() {
       </h1>
 
       <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.9, delay: 0.7 }}
-        style={{ maxWidth: 520, color: DIM, fontSize: 17, lineHeight: 1.6, marginBottom: 44 }}>
+        style={{ maxWidth: 520, color: DIM, fontSize: 17, lineHeight: 1.6, margin: '0 auto 44px' }}>
         You don&apos;t need to know where to start. You don&apos;t need to be fit already.
         You just need one coach who shows up for you — and a room that makes consistency feel easy.{' '}
         <strong style={{ color: INK }}>We&apos;ll take it from there.</strong>
       </motion.p>
 
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}
-        style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
-        <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '18px 28px', fontFamily: MONO, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.14em', fontWeight: 600, background: LIME, color: BG, border: 'none', cursor: 'pointer', transition: 'all 0.25s ease' }}>
+        style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+        <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '18px 28px', fontFamily: MONO, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.14em', fontWeight: 600, background: LIME, color: INK, border: 'none', cursor: 'pointer', transition: 'all 0.25s ease' }}>
           Start Your Transformation <span>→</span>
         </button>
         <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '18px 28px', fontFamily: MONO, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.14em', fontWeight: 600, background: 'transparent', color: INK, border: `1px solid ${LINE2}`, cursor: 'pointer' }}>
-          Try First Workout <strong style={{ color: LIME }}>FREE</strong>
+          Try First Workout <strong style={{ color: LIME2 }}>FREE</strong>
         </button>
       </motion.div>
 
@@ -186,7 +187,7 @@ function TrakJourney() {
     { n: '01', title: 'Walk In', body: 'Free first visit. No pressure pitch. We assess, you decide. Takes 45 minutes.' },
     { n: '02', title: 'Get Mapped', body: 'Body analysis, goal conversation, a written plan for your first 30 days. Built for you, not a template.' },
     { n: '03', title: 'Get Coached', body: 'Every session, someone watches. Form calls, weight progressions, honest feedback — the hours you put in actually compound.' },
-    { n: '04', title: 'Become', body: 'Most members hit their first visible change by week 6. The discipline outlasts the photo. That\'s the real prize.' },
+    { n: '04', title: 'Become', body: "Most members hit their first visible change by week 6. The discipline outlasts the photo. That's the real prize." },
   ];
 
   return (
@@ -212,7 +213,6 @@ function TrakJourney() {
               style={{ padding: '48px 36px', borderRight: i < 3 ? `1px solid ${LINE}` : 'none', position: 'relative' }}
             >
               <div style={{ fontFamily: MONO, fontSize: 10, color: LIME, letterSpacing: '0.2em', marginBottom: 24 }}>STAGE {s.n}</div>
-              {/* Progress dot */}
               <div style={{ width: 12, height: 12, borderRadius: '50%', background: inView ? LIME : LINE2, border: `2px solid ${inView ? LIME : FAINT}`, marginBottom: 20, transition: `background 0.5s ease ${i * 0.2}s, border-color 0.5s ease ${i * 0.2}s` }} />
               <h3 style={{ fontFamily: DISPLAY, fontSize: 'clamp(32px,3vw,48px)', textTransform: 'uppercase', lineHeight: 0.95, marginBottom: 16 }}>{s.title}</h3>
               <p style={{ color: DIM, fontSize: 15, lineHeight: 1.6 }}>{s.body}</p>
@@ -247,7 +247,6 @@ function TrakTestimonials() {
         </Reveal>
       </div>
 
-      {/* Masonry-style stagger */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))', gap: 1, borderTop: `1px solid ${LINE}` }}>
         {quotes.map((q, i) => (
           <Reveal key={i} delay={i * 0.07}>
@@ -255,7 +254,7 @@ function TrakTestimonials() {
               <div style={{ fontSize: 48, color: LIME, lineHeight: 1, marginBottom: 12, fontFamily: DISPLAY }}>&ldquo;</div>
               <p style={{ color: INK, fontSize: 16, lineHeight: 1.6, marginBottom: 28 }}>{q.body}</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{ width: 36, height: 36, borderRadius: '50%', background: LIME, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: MONO, fontSize: 10, color: BG, fontWeight: 700 }}>{q.name.slice(0,2)}</div>
+                <div style={{ width: 36, height: 36, borderRadius: '50%', background: LIME, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: MONO, fontSize: 10, color: INK, fontWeight: 700 }}>{q.name.slice(0,2)}</div>
                 <div>
                   <div style={{ fontFamily: MONO, fontSize: 10, color: INK, letterSpacing: '0.12em' }}>{q.name}</div>
                   <div style={{ fontFamily: MONO, fontSize: 10, color: FAINT, letterSpacing: '0.1em' }}>{q.meta}</div>
@@ -273,7 +272,7 @@ function TrakTestimonials() {
 function TrakWhy() {
   const items = [
     { num: '01', title: 'We See You Show Up', sub: "You don't need to know where to start. A coach walks you through your first rep to your first deadlift — at whatever pace your body needs." },
-    { num: '02', title: 'We Notice When You Don\'t', sub: "Miss a day, get a warm check-in. Not pushy — caring. The hardest part of training is showing up. We make it feel like you're expected." },
+    { num: '02', title: "We Notice When You Don't", sub: "Miss a day, get a warm check-in. Not pushy — caring. The hardest part of training is showing up. We make it feel like you're expected." },
     { num: '03', title: 'The Space Feels Human', sub: "No mirror flexing. No grunt squad. Just a clean, warm floor where beginners and lifetime lifters share space with quiet respect." },
     { num: '04', title: 'You Leave With Confidence', sub: "We don't just build bodies. We build the version of you that doesn't flinch in photos, sleeps better, and walks taller into every room." },
   ];
@@ -372,7 +371,7 @@ function TrakMembership() {
             <strong style={{ color: INK }}>{slots}</strong> open spots across all coaches.
           </p>
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '18px 28px', fontFamily: MONO, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.14em', fontWeight: 600, background: LIME, color: BG, border: 'none', cursor: 'pointer' }}>
+            <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '18px 28px', fontFamily: MONO, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.14em', fontWeight: 600, background: LIME, color: INK, border: 'none', cursor: 'pointer' }}>
               Claim Your Slot →
             </button>
             <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '18px 28px', fontFamily: MONO, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.14em', fontWeight: 600, background: 'transparent', color: INK, border: `1px solid ${LINE2}`, cursor: 'pointer' }}>
@@ -421,7 +420,7 @@ function TrakMembership() {
 function TrakFinalCTA() {
   return (
     <section style={{ padding: 'clamp(100px,14vw,180px) clamp(24px,4vw,48px)', borderTop: `1px solid ${LINE}`, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 800, height: 800, borderRadius: '50%', background: `radial-gradient(circle, ${LIME}08 0%, transparent 70%)`, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 800, height: 800, borderRadius: '50%', background: `radial-gradient(circle, ${LIME}14 0%, transparent 70%)`, pointerEvents: 'none' }} />
       <Reveal>
         <div style={{ fontFamily: MONO, fontSize: 11, color: LIME, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 32 }}>09 / The Decision</div>
         <h2 style={{ fontFamily: DISPLAY, fontSize: 'clamp(56px,10vw,130px)', lineHeight: 0.88, textTransform: 'uppercase', marginBottom: 32 }}>
@@ -432,7 +431,7 @@ function TrakFinalCTA() {
           The version of you that walks out of here in six months — they started today. Not Monday. Not next month. Today.
         </p>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '20px 36px', fontFamily: MONO, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.14em', fontWeight: 600, background: LIME, color: BG, border: 'none', cursor: 'pointer' }}>
+          <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '20px 36px', fontFamily: MONO, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.14em', fontWeight: 600, background: LIME, color: INK, border: 'none', cursor: 'pointer' }}>
             Book Your Free Workout →
           </button>
           <button style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '20px 36px', fontFamily: MONO, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.14em', fontWeight: 600, background: 'transparent', color: INK, border: `1px solid ${LINE2}`, cursor: 'pointer' }}>

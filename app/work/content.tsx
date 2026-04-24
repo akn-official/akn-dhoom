@@ -30,7 +30,7 @@ const PORTFOLIO_SITES: PortfolioSite[] = [
     tag: 'Gym · Chennai',
     year: '2025',
     url: 'trakfitness.in',
-    ph: { bg: '#0A0A0A', stripe: '#D4FF3A', ink: '#D4FF3A', angle: 45, gap: 10 },
+    ph: { bg: '#0D0608', stripe: '#9B2335', ink: '#F5EFE4', angle: 45, gap: 10 },
   },
 ];
 

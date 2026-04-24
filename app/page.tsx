@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Loader2, ChevronDown } from 'lucide-react';
 import { scrollToId } from '@/lib/scroll';
@@ -44,7 +43,6 @@ export default function Home() {
 
   const servicesRef = useRef<HTMLDivElement>(null);
   const serviceCardsRef = useRef<HTMLDivElement[]>([]);
-  const comingSoonRef = useRef<HTMLDivElement>(null);
 
   const defaultServices = [
     { title: 'Web Presence', description: 'Your website is your hardest-working employee. We build clean, fast, conversion-focused websites that represent your business 24/7. Currently free for our first five clients.', details: 'Includes custom design, mobile optimization, fast loading speeds, and basic SEO setup to ensure your business makes a strong first impression online.' },
@@ -85,14 +83,6 @@ export default function Home() {
       .fromTo(heroTextRef.current, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: 'power3.out' })
       .fromTo(heroSubRef.current, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power3.out' }, '-=0.6')
       .fromTo(heroCtaRef.current, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power3.out' }, '-=0.6');
-
-    gsap.from(comingSoonRef.current, {
-      scale: 0.95,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: comingSoonRef.current, start: 'top 85%', toggleActions: 'play none none reverse' },
-    });
 
     // Parallax: hero content drifts at a slower rate than the page
     const reducedMotion = typeof window !== 'undefined' &&
@@ -307,35 +297,64 @@ export default function Home() {
       {/* Work & Insights Section */}
       <section id="work" className="py-24 sm:py-32 3xl:py-40 px-4 sm:px-8 bg-zinc-900/40 relative overflow-hidden">
         <div className="max-w-7xl 2xl:max-w-screen-2xl 3xl:max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16">
-          {/* Work */}
+          {/* Work — Sample Designs */}
           <div>
-            <h2 className="font-epilogue text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold tracking-tighter mb-6">
-              OUR WORK — <br/>
-              <span className="text-[#2A8B9D]">COMING INTO FOCUS</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2A8B9D]/40 bg-[#2A8B9D]/5 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2A8B9D]" />
+              <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#2A8B9D]">Our Samples</span>
+            </div>
+            <h2 className="font-epilogue text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold tracking-tighter mb-4">
+              DESIGNS WE&apos;VE{' '}<br/>
+              <span className="text-[#2A8B9D]">BUILT.</span>
             </h2>
             <p className="text-base sm:text-lg text-zinc-400 mb-8 leading-relaxed">
-              We launched in April 2025. Our first projects are underway. This page will be home to real results, real clients, and real before-and-afters — updated as we deliver.
+              Sample sites showcasing the quality and style of work we deliver. Click any card to explore the full design.
             </p>
-            <ul className="space-y-4 text-zinc-300 mb-12">
-              <li className="flex items-center gap-3"><ArrowRight size={16} className="text-[#C87A4F] shrink-0"/> Local SEO ranking improvements</li>
-              <li className="flex items-center gap-3"><ArrowRight size={16} className="text-[#C87A4F] shrink-0"/> GMB profile transformations</li>
-              <li className="flex items-center gap-3"><ArrowRight size={16} className="text-[#C87A4F] shrink-0"/> Website builds for service businesses worldwide</li>
-              <li className="flex items-center gap-3"><ArrowRight size={16} className="text-[#C87A4F] shrink-0"/> Social media growth timelines</li>
-            </ul>
-            <div ref={comingSoonRef} className="relative aspect-video w-full rounded-2xl overflow-hidden border border-zinc-800 group bg-zinc-900">
-              <Image
-                src="/coming-soon.png"
-                alt="Portfolio Coming Soon"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="font-epilogue font-bold tracking-widest uppercase text-white text-sm sm:text-base">Currently Onboarding</span>
-              </div>
+
+            {/* Mini browser card CTAs */}
+            <div className="space-y-3 mb-8">
+              {[
+                { name: 'AKN Portfolio', url: 'aspirekineticnetwork.in', tag: 'Sample Design', dot: '#c7ff3b', bg: '#0e1a12' },
+                { name: 'Trak Fitness', url: 'trakfitness.in', tag: 'Gym · Chennai', dot: '#9B2335', bg: '#0D0608' },
+              ].map((card) => (
+                <Link key={card.name} href="/work" className="block group">
+                  <div className="rounded-xl overflow-hidden border border-zinc-800 group-hover:border-[#2A8B9D] transition-all duration-300 bg-zinc-900/50 backdrop-blur-sm group-hover:shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+                    {/* Browser chrome */}
+                    <div className="flex items-center gap-2 bg-zinc-900/80 border-b border-zinc-800 px-3 py-2">
+                      <div className="flex gap-1.5 shrink-0">
+                        <span className="block w-2 h-2 rounded-full bg-[#ff5f56]" />
+                        <span className="block w-2 h-2 rounded-full bg-[#ffbd2e]" />
+                        <span className="block w-2 h-2 rounded-full bg-[#27c93f]" />
+                      </div>
+                      <div className="flex-1 bg-zinc-950 border border-zinc-800 rounded px-2 py-0.5 font-mono text-[9px] text-zinc-500 tracking-wide truncate">
+                        {card.url}
+                      </div>
+                    </div>
+                    {/* Preview strip */}
+                    <div className="h-16 relative overflow-hidden" style={{ background: card.bg }}>
+                      <div className="absolute inset-0 flex items-center px-4 gap-3">
+                        <div className="w-2 h-2 rounded-full shrink-0" style={{ background: card.dot }} />
+                        <div className="flex-1 h-1 rounded-full opacity-25" style={{ background: card.dot }} />
+                        <div className="w-14 h-4 rounded opacity-15" style={{ background: card.dot }} />
+                      </div>
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
+                        <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-[#2A8B9D] opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-[#2A8B9D] rounded-full px-4 py-1.5">
+                          View Design →
+                        </span>
+                      </div>
+                    </div>
+                    {/* Card footer */}
+                    <div className="flex items-center justify-between px-3 py-2 border-t border-zinc-800">
+                      <span className="font-epilogue text-xs font-semibold text-white">{card.name}</span>
+                      <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-zinc-500 group-hover:text-[#2A8B9D] transition-colors duration-300">{card.tag}</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-            <Link href="/work" className="inline-flex items-center gap-2 mt-8 text-[#2A8B9D] hover:text-[#C87A4F] font-bold text-sm uppercase tracking-widest transition-colors group">
-              View All Work <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+
+            <Link href="/work" className="inline-flex items-center gap-2 text-[#2A8B9D] hover:text-[#C87A4F] font-bold text-sm uppercase tracking-widest transition-colors group">
+              Explore All Samples <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
 
