@@ -1,4 +1,4 @@
-import { Space_Grotesk, JetBrains_Mono, Instrument_Serif } from 'next/font/google';
+import { Space_Grotesk, JetBrains_Mono, Instrument_Serif, Anton } from 'next/font/google';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -20,9 +20,16 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 });
 
+const anton = Anton({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-trak-display',
+  display: 'swap',
+});
+
 export default function WorkLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}>
+    <div className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} ${anton.variable}`}>
       {children}
     </div>
   );

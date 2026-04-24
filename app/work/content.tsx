@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { AKNPortfolioDesign } from './portfolio-design';
+import { TrakFitnessDesign } from './trak-fitness';
 import type { Work } from '@/lib/supabase/types';
 
 interface PortfolioSite {
@@ -22,6 +23,14 @@ const PORTFOLIO_SITES: PortfolioSite[] = [
     year: '2025',
     url: 'aspirekineticnetwork.in',
     ph: { bg: '#0e1a12', stripe: '#c7ff3b', ink: '#c7ff3b', angle: 30, gap: 12 },
+  },
+  {
+    id: 'trak-fitness',
+    name: 'Trak Fitness',
+    tag: 'Gym · Chennai',
+    year: '2025',
+    url: 'trakfitness.in',
+    ph: { bg: '#0A0A0A', stripe: '#D4FF3A', ink: '#D4FF3A', angle: 45, gap: 10 },
   },
 ];
 
@@ -161,6 +170,7 @@ function DesignModal({ site, works, onClose }: { site: PortfolioSite; works: Wor
         className="flex-1 overflow-y-auto"
       >
         {site.id === 'akn-portfolio' && <AKNPortfolioDesign works={works} />}
+        {site.id === 'trak-fitness' && <TrakFitnessDesign />}
       </motion.div>
     </motion.div>
   );
