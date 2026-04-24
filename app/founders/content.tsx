@@ -32,7 +32,7 @@ const founders = [
     id: 'koushal',
     name: 'Koushal PR',
     role: 'Co-Founder & Content Head',
-    image: '/koushal.png',
+    image: '/koushal.jpg',
     bio: [
       'Koushal is the voice behind AKN\'s content engine. He architects the narratives that turn browsers into buyers — building content systems that are not just consistent, but compounding.',
       'Where most agencies treat content as an afterthought, Koushal treats it as the primary growth lever. He understands that in a crowded digital landscape, the brand that communicates with the most clarity and conviction wins.',

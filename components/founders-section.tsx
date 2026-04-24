@@ -43,7 +43,7 @@ const founders: Founder[] = [
     role: 'Content Head',
     quote: '"Content without strategy is just noise. We don\'t make noise."',
     bio: "Koushal understands that attention is earned, not bought. He leads content strategy and creative direction at AKN — shaping how each client's brand sounds, looks, and feels across every platform.",
-    image: '/koushal.png',
+    image: '/koushal.jpg',
     socials: {},
   },
 ];
