@@ -8,8 +8,14 @@ export function PageViewTracker() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Don't track admin pages
-    if (pathname.startsWith('/admin')) return;
+    if (pathname.startsWith('/admin') || pathname.startsWith('/portal')) return;
+
+    // Respect consent — only track if the user has accepted analytics
+    try {
+      if (localStorage.getItem('akn-cookie-consent') !== 'accepted') return;
+    } catch {
+      return;
+    }
 
     const supabase = createClient();
     supabase.from('page_views').insert({

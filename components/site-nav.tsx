@@ -51,6 +51,7 @@ export function SiteNav() {
       const radius = 120;
       if (dist < radius) {
         const pull = (1 - dist / radius) * 10;
+        if (dist === 0) return;
         btn.style.transform = `translate3d(${(dx / dist) * pull}px, ${(dy / dist) * pull}px, 0)`;
       } else {
         btn.style.transform = 'translate3d(0,0,0)';
@@ -116,7 +117,7 @@ export function SiteNav() {
   };
 
   const navLinks = [
-    { title: t('founders'), id: 'about', href: isHome ? '#about' : '/#about' },
+    { title: t('founders'), id: 'about', href: isHome ? '#about' : '/founders' },
     { title: t('services'), id: 'services', href: isHome ? '#services' : '/#services' },
     { title: t('work'), id: 'work', href: isHome ? '#work' : '/#work' },
     { title: t('insights'), id: 'insights', href: '/insights' },

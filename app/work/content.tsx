@@ -1,21 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
-import Link from 'next/link';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { AKNPortfolioDesign } from './portfolio-design';
 import type { Work } from '@/lib/supabase/types';
-
-const DISPLAY = 'var(--font-portfolio-display, system-ui)';
-const MONO = 'var(--font-portfolio-mono, ui-monospace, monospace)';
-const SERIF = 'var(--font-portfolio-serif, Georgia, serif)';
-
-const BG = '#0a0a0a';
-const FG = '#f4f1ea';
-const LIME = '#c7ff3b';
-const MUTED = '#6b6b6b';
-const ELEV = '#141414';
-const BORDER = '#1f1f1f';
 
 interface PortfolioSite {
   id: string;
@@ -30,7 +18,7 @@ const PORTFOLIO_SITES: PortfolioSite[] = [
   {
     id: 'akn-portfolio',
     name: 'AKN Portfolio',
-    tag: 'Digital Studio',
+    tag: 'Sample Design',
     year: '2025',
     url: 'aspirekineticnetwork.in',
     ph: { bg: '#0e1a12', stripe: '#c7ff3b', ink: '#c7ff3b', angle: 30, gap: 12 },
@@ -38,9 +26,9 @@ const PORTFOLIO_SITES: PortfolioSite[] = [
 ];
 
 function SitePreview({ ph, id }: { ph: PortfolioSite['ph']; id: string }) {
-  const stripeId = `site-stripe-${id}`;
+  const stripeId = `work-stripe-${id}`;
   return (
-    <svg viewBox="0 0 360 220" preserveAspectRatio="xMidYMid slice" style={{ width: '100%', height: '100%', display: 'block' }}>
+    <svg viewBox="0 0 360 220" preserveAspectRatio="xMidYMid slice" className="w-full h-full block">
       <defs>
         <pattern id={stripeId} patternUnits="userSpaceOnUse" width={ph.gap * 2} height={ph.gap * 2} patternTransform={`rotate(${ph.angle})`}>
           <rect width={ph.gap * 2} height={ph.gap * 2} fill={ph.bg} />
@@ -49,7 +37,7 @@ function SitePreview({ ph, id }: { ph: PortfolioSite['ph']; id: string }) {
       </defs>
       <rect width="360" height="220" fill={ph.bg} />
       <rect width="360" height="220" fill={`url(#${stripeId})`} />
-      {/* mock nav bar */}
+      {/* mock nav */}
       <rect x="20" y="16" width="60" height="5" rx="2" fill={ph.ink} opacity={0.6} />
       <rect x="240" y="16" width="30" height="5" rx="2" fill={ph.ink} opacity={0.25} />
       <rect x="280" y="16" width="30" height="5" rx="2" fill={ph.ink} opacity={0.25} />
@@ -79,88 +67,50 @@ function BrowserCard({ site, onOpen }: { site: PortfolioSite; onOpen: () => void
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
       onClick={onOpen}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); } }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        flexShrink: 0,
-        width: 'clamp(280px, 38vw, 420px)',
-        cursor: 'pointer',
-        borderRadius: 10,
-        overflow: 'hidden',
-        border: `1px solid ${hovered ? LIME : BORDER}`,
-        background: ELEV,
-        transition: 'border-color 0.35s ease, transform 0.4s ease, box-shadow 0.4s ease',
-        transform: hovered ? 'translateY(-8px) scale(1.01)' : 'translateY(0) scale(1)',
-        boxShadow: hovered
-          ? `0 28px 64px rgba(0,0,0,0.7), 0 0 0 1px ${LIME}33`
-          : '0 4px 24px rgba(0,0,0,0.35)',
-      }}
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${site.name} design`}
+      className={`relative flex-shrink-0 cursor-pointer rounded-xl overflow-hidden border backdrop-blur-sm transition-all duration-350 outline-none focus-visible:ring-2 focus-visible:ring-[#2A8B9D] ${
+        hovered
+          ? 'border-[#2A8B9D] shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_0_1px_rgba(42,139,157,0.2)] -translate-y-2'
+          : 'border-zinc-800 shadow-[0_4px_24px_rgba(0,0,0,0.4)] translate-y-0'
+      }`}
+      style={{ width: 'clamp(280px, 38vw, 420px)', background: 'rgba(24,27,36,0.8)' }}
     >
       {/* Browser Chrome */}
-      <div style={{
-        background: '#181818',
-        borderBottom: `1px solid ${BORDER}`,
-        padding: '10px 14px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 10,
-      }}>
-        <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
-          <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff5f56', display: 'block' }} />
-          <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffbd2e', display: 'block' }} />
-          <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#27c93f', display: 'block' }} />
+      <div className="flex items-center gap-2.5 bg-[#181818] border-b border-zinc-800 px-3.5 py-2.5">
+        <div className="flex gap-1.5 shrink-0">
+          <span className="block w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+          <span className="block w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+          <span className="block w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
         </div>
-        <div style={{
-          flex: 1,
-          background: '#0f0f0f',
-          border: `1px solid ${BORDER}`,
-          borderRadius: 4,
-          padding: '4px 10px',
-          fontFamily: MONO,
-          fontSize: 10,
-          color: MUTED,
-          letterSpacing: '0.04em',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        }}>
+        <div className="flex-1 bg-zinc-950 border border-zinc-800 rounded px-2.5 py-1 font-mono text-[10px] text-zinc-500 tracking-wide overflow-hidden text-ellipsis whitespace-nowrap">
           {site.url}
         </div>
       </div>
 
-      {/* Preview viewport */}
-      <div style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Preview */}
+      <div className="relative overflow-hidden">
         <SitePreview ph={site.ph} id={site.id} />
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'rgba(10,10,10,0.82)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          opacity: hovered ? 1 : 0,
-          transition: 'opacity 0.35s ease',
-        }}>
-          <span style={{
-            fontFamily: MONO, fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: LIME, padding: '10px 24px', border: `1px solid ${LIME}`, borderRadius: 100,
-          }}>View Design →</span>
+        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 bg-black/80 ${hovered ? 'opacity-100' : 'opacity-0'}`}>
+          <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#2A8B9D] border border-[#2A8B9D] rounded-full px-6 py-2.5">
+            View Design →
+          </span>
         </div>
       </div>
 
-      {/* Card info */}
-      <div style={{ padding: '14px 18px 16px', borderTop: `1px solid ${BORDER}` }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
-          <span style={{ fontFamily: DISPLAY, fontSize: 15, fontWeight: 500, letterSpacing: '-0.01em', color: FG }}>
-            {site.name}
-          </span>
-          <span style={{ fontFamily: MONO, fontSize: 10, color: MUTED, letterSpacing: '0.1em' }}>
-            {site.year}
-          </span>
+      {/* Card footer */}
+      <div className="flex items-baseline justify-between px-4 py-3 border-t border-zinc-800 bg-zinc-900/50">
+        <div>
+          <p className="font-epilogue text-sm font-semibold text-white mb-0.5">{site.name}</p>
+          <p className={`font-mono text-[10px] tracking-[0.14em] uppercase transition-colors duration-300 ${hovered ? 'text-[#2A8B9D]' : 'text-zinc-500'}`}>
+            {site.tag}
+          </p>
         </div>
-        <span style={{
-          fontFamily: MONO, fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase',
-          color: hovered ? LIME : MUTED, transition: 'color 0.3s ease',
-        }}>
-          {site.tag}
-        </span>
+        <span className="font-mono text-[10px] text-zinc-600 tracking-wide">{site.year}</span>
       </div>
     </motion.div>
   );
@@ -184,47 +134,31 @@ function DesignModal({ site, works, onClose }: { site: PortfolioSite; works: Wor
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      style={{
-        position: 'fixed', inset: 0, zIndex: 300,
-        background: BG,
-        display: 'flex', flexDirection: 'column',
-      }}
+      className="fixed inset-0 z-[300] flex flex-col bg-[#0a0a0a]"
     >
-      {/* Sticky close bar */}
-      <div style={{
-        flexShrink: 0,
-        background: BG,
-        borderBottom: `1px solid ${BORDER}`,
-        padding: '12px clamp(20px, 4vw, 40px)',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        zIndex: 10,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ width: 7, height: 7, borderRadius: '50%', background: LIME, display: 'inline-block', animation: 'designPulse 2s ease-in-out infinite' }} />
-          <span style={{ fontFamily: MONO, fontSize: 10, color: MUTED, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
+      {/* Sticky bar */}
+      <div className="flex-shrink-0 flex items-center justify-between gap-4 px-5 sm:px-8 py-3 border-b border-zinc-800 bg-[#0a0a0a]">
+        <div className="flex items-center gap-2.5">
+          <span className="block w-2 h-2 rounded-full bg-[#2A8B9D] animate-pulse" />
+          <span className="font-mono text-[10px] text-zinc-500 tracking-[0.18em] uppercase">
             {site.name} — {site.url}
           </span>
         </div>
         <button
           onClick={onClose}
           aria-label="Close design preview"
-          onMouseEnter={(e) => { e.currentTarget.style.background = LIME; e.currentTarget.style.color = BG; e.currentTarget.style.borderColor = LIME; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = FG; e.currentTarget.style.borderColor = BORDER; }}
-          style={{
-            fontFamily: MONO, fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase',
-            color: FG, background: 'transparent', border: `1px solid ${BORDER}`,
-            padding: '7px 16px', borderRadius: 100, cursor: 'pointer',
-            transition: 'all 0.25s ease',
-          }}
-        >Close ×</button>
+          className="font-mono text-[10px] tracking-[0.18em] uppercase text-zinc-300 border border-zinc-700 hover:border-[#2A8B9D] hover:text-[#2A8B9D] px-4 py-1.5 rounded-full transition-colors"
+        >
+          Close ×
+        </button>
       </div>
 
       {/* Scrollable design */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, delay: 0.1, ease: [0.2, 0.8, 0.2, 1] }}
-        style={{ flex: 1, overflowY: 'auto' }}
+        transition={{ duration: 0.4, delay: 0.1, ease: [0.2, 0.8, 0.2, 1] }}
+        className="flex-1 overflow-y-auto"
       >
         {site.id === 'akn-portfolio' && <AKNPortfolioDesign works={works} />}
       </motion.div>
@@ -243,11 +177,9 @@ export function WorkPageContent({ works }: { works: Work[] }) {
     if (!el) return;
     const cards = el.querySelectorAll<HTMLElement>('[data-browser-card]');
     const center = el.scrollLeft + el.clientWidth / 2;
-    let closest = 0;
-    let min = Infinity;
+    let closest = 0, min = Infinity;
     cards.forEach((c, i) => {
-      const mid = c.offsetLeft + c.offsetWidth / 2;
-      const d = Math.abs(mid - center);
+      const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center);
       if (d < min) { min = d; closest = i; }
     });
     setActiveIdx(closest);
@@ -257,131 +189,94 @@ export function WorkPageContent({ works }: { works: Work[] }) {
     const el = carouselRef.current;
     if (!el) return;
     const card = el.querySelector<HTMLElement>('[data-browser-card]');
-    const w = card ? card.offsetWidth + 28 : 450;
-    el.scrollBy({ left: dir * w, behavior: 'smooth' });
+    el.scrollBy({ left: dir * ((card?.offsetWidth ?? 400) + 28), behavior: 'smooth' });
   };
 
   const multipleCards = PORTFOLIO_SITES.length > 1;
 
   return (
-    <div style={{ background: BG, color: FG, fontFamily: DISPLAY, minHeight: '100vh' }}>
-      <style>{`
-        @keyframes designPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
-        .work-carousel::-webkit-scrollbar { display: none; }
-      `}</style>
+    <div id="main-content" className="min-h-screen bg-[#0A0F1C] text-zinc-50">
+      {/* Ambient glows */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden -z-10" aria-hidden>
+        <div className="absolute top-1/4 -left-40 w-[600px] h-[600px] rounded-full bg-[#2A8B9D]/6 blur-[120px]" />
+        <div className="absolute bottom-1/3 -right-40 w-[500px] h-[500px] rounded-full bg-[#C87A4F]/5 blur-[100px]" />
+      </div>
 
       {/* PAGE HEADER */}
-      <section style={{
-        padding: 'clamp(80px, 12vw, 160px) clamp(24px, 4vw, 56px) clamp(56px, 8vw, 100px)',
-        textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <section className="relative pt-32 sm:pt-40 pb-16 sm:pb-20 px-4 sm:px-8 text-center overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+          className="max-w-3xl mx-auto"
         >
-          <div style={{ fontFamily: MONO, fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', color: LIME, marginBottom: 20 }}>
-            ◇ Our Work
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2A8B9D]/40 bg-[#2A8B9D]/5 mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2A8B9D]" />
+            <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#2A8B9D]">Sample Work</span>
           </div>
-          <h1 style={{
-            fontFamily: DISPLAY, fontWeight: 400,
-            fontSize: 'clamp(40px, 7vw, 100px)',
-            lineHeight: 0.95, letterSpacing: '-0.035em',
-            marginBottom: 28, maxWidth: 800, margin: '0 auto 28px',
-          }}>
-            Real results,{' '}
-            <span style={{ fontFamily: SERIF, fontStyle: 'italic' }}>real clients.</span>
+
+          <h1 className="font-epilogue text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-6">
+            How we{' '}
+            <span className="text-[#C87A4F]">design</span>.
           </h1>
-          <p style={{ color: MUTED, fontSize: 16, lineHeight: 1.6, maxWidth: 480, margin: '0 auto 0' }}>
-            A growing portfolio of digital work — websites, campaigns, and brands built for businesses that want to stand out and grow.
+
+          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-xl mx-auto">
+            These are sample designs we&apos;ve built to demonstrate the quality and style of work we deliver for clients. Click any card to explore the full design.
           </p>
         </motion.div>
       </section>
 
       {/* CAROUSEL */}
-      <section style={{ paddingBottom: 'clamp(80px, 10vw, 140px)' }}>
-        {/* Nav row (only shown if multiple sites) */}
+      <section className="pb-24 sm:pb-32">
         {multipleCards && (
-          <div style={{
-            padding: '0 clamp(24px, 4vw, 56px)',
-            display: 'flex', justifyContent: 'flex-end', gap: 10, marginBottom: 28,
-          }}>
-            <button
-              onClick={() => scrollCarousel(-1)}
-              aria-label="Previous"
-              onMouseEnter={(e) => { e.currentTarget.style.background = LIME; e.currentTarget.style.color = BG; e.currentTarget.style.borderColor = LIME; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = FG; e.currentTarget.style.borderColor = BORDER; }}
-              style={{ width: 48, height: 48, borderRadius: 100, border: `1px solid ${BORDER}`, background: 'transparent', color: FG, cursor: 'pointer', fontSize: 16, transition: 'all 0.3s ease' }}
-            >←</button>
-            <button
-              onClick={() => scrollCarousel(1)}
-              aria-label="Next"
-              onMouseEnter={(e) => { e.currentTarget.style.background = LIME; e.currentTarget.style.color = BG; e.currentTarget.style.borderColor = LIME; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = FG; e.currentTarget.style.borderColor = BORDER; }}
-              style={{ width: 48, height: 48, borderRadius: 100, border: `1px solid ${BORDER}`, background: 'transparent', color: FG, cursor: 'pointer', fontSize: 16, transition: 'all 0.3s ease' }}
-            >→</button>
+          <div className="flex justify-end gap-2.5 px-4 sm:px-8 mb-6">
+            {([-1, 1] as const).map((dir) => (
+              <button
+                key={dir}
+                onClick={() => scrollCarousel(dir)}
+                aria-label={dir === -1 ? 'Previous' : 'Next'}
+                className="w-11 h-11 rounded-full border border-zinc-700 hover:border-[#2A8B9D] hover:text-[#2A8B9D] text-zinc-300 transition-colors text-base"
+              >
+                {dir === -1 ? '←' : '→'}
+              </button>
+            ))}
           </div>
         )}
 
-        {/* Cards */}
         {multipleCards ? (
-          /* scrollable row for 2+ cards */
           <>
             <div
               ref={carouselRef}
               onScroll={updateActive}
-              className="work-carousel"
-              style={{
-                display: 'flex', gap: 28,
-                overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none',
-                padding: '8px clamp(24px, 4vw, 56px) 16px',
-                scrollPaddingLeft: 'clamp(24px, 4vw, 56px)',
-              }}
+              className="flex gap-7 overflow-x-auto scroll-snap-x [scroll-snap-type:x_mandatory] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden px-4 sm:px-8 pb-4"
+              style={{ scrollPaddingLeft: 'clamp(16px,4vw,32px)' }}
             >
               {PORTFOLIO_SITES.map((site) => (
                 <div key={site.id} style={{ scrollSnapAlign: 'center' }}>
                   <BrowserCard site={site} onOpen={() => setOpenSiteId(site.id)} />
                 </div>
               ))}
-              <div style={{ flexShrink: 0, width: 1 }} />
+              <div className="flex-shrink-0 w-px" />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 24 }}>
+            <div className="flex justify-center gap-2 mt-6">
               {PORTFOLIO_SITES.map((_, i) => (
-                <span key={i} style={{
-                  width: i === activeIdx ? 28 : 8, height: 4, borderRadius: 4,
-                  background: i === activeIdx ? LIME : BORDER, transition: 'all 0.4s ease',
-                }} />
+                <span
+                  key={i}
+                  className="h-1 rounded-full transition-all duration-400"
+                  style={{ width: i === activeIdx ? 28 : 8, background: i === activeIdx ? '#2A8B9D' : '#3f3f46' }}
+                />
               ))}
             </div>
           </>
         ) : (
-          /* centered single card */
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, padding: '8px clamp(24px, 4vw, 56px)' }}>
+          <div className="flex flex-col items-center gap-5 px-4 sm:px-8">
             <BrowserCard site={PORTFOLIO_SITES[0]} onOpen={() => setOpenSiteId(PORTFOLIO_SITES[0].id)} />
-            <p style={{ fontFamily: MONO, fontSize: 10, color: MUTED, letterSpacing: '0.18em', textTransform: 'uppercase', marginTop: 8 }}>
-              More portfolio sites coming soon
+            <p className="font-mono text-[10px] text-zinc-600 tracking-[0.2em] uppercase">
+              More designs coming soon
             </p>
           </div>
         )}
       </section>
-
-      {/* FOOTER */}
-      <footer style={{
-        padding: '24px clamp(24px, 4vw, 56px)',
-        borderTop: `1px solid ${BORDER}`,
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        gap: 20, flexWrap: 'wrap',
-        fontFamily: MONO, fontSize: 11, color: MUTED, letterSpacing: '0.15em', textTransform: 'uppercase',
-      }}>
-        <span>© 2026 Aspire Kinetic Network</span>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ width: 7, height: 7, borderRadius: '50%', background: LIME, display: 'inline-block', animation: 'designPulse 2s ease-in-out infinite' }} />
-          Available for new clients
-        </span>
-        <Link href="/" style={{ color: FG, textDecoration: 'none' }}>← Back to Studio</Link>
-      </footer>
 
       <AnimatePresence>
         {openSite && (

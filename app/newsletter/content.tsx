@@ -30,23 +30,22 @@ export function NewsletterPageContent() {
     const formData = new FormData(form);
 
     try {
-      // Send to Formspree for email notification
+      // Send to Formspree first — only persist to Supabase on success
       const response = await fetch('https://formspree.io/f/mdawzbrj', {
         method: 'POST',
         body: formData,
         headers: { 'Accept': 'application/json' },
       });
 
-      // Also save to Supabase for subscriber management
-      const supabase = createClient();
-      await supabase.from('newsletter_subscribers').insert({
-        name: formData.get('name') as string || null,
-        email: formData.get('email') as string,
-        is_active: true,
-        source: 'newsletter_page',
-      });
-
       if (response.ok) {
+        // Formspree succeeded — save to Supabase for subscriber management
+        const supabase = createClient();
+        await supabase.from('newsletter_subscribers').insert({
+          name: (formData.get('name') as string) || null,
+          email: formData.get('email') as string,
+          is_active: true,
+          source: 'newsletter_page',
+        });
         setStatus('success');
         form.reset();
       } else {

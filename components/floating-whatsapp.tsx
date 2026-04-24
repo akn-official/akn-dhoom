@@ -25,8 +25,8 @@ export function FloatingWhatsApp() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Hide on admin pages
-  if (pathname.startsWith('/admin')) return null;
+  // Hide on admin and portal pages
+  if (pathname.startsWith('/admin') || pathname.startsWith('/portal')) return null;
 
   return (
     <div className={`fixed bottom-6 right-6 z-50 flex-col items-end gap-3 ${stickyActive ? 'hidden sm:flex' : 'flex'}`}>

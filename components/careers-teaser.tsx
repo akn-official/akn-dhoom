@@ -109,7 +109,7 @@ export function CareersTeaser({ className = '' }: Props) {
           {careers.map((c) => (
             <Link
               key={c.id}
-              href={`/careers/${c.slug}`}
+              href="/careers"
               className="careers-teaser-card group relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:p-6 rounded-2xl bg-zinc-900/70 border border-zinc-800 hover:border-[#C87A4F]/60 transition-colors"
             >
               <div>
