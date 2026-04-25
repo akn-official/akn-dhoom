@@ -56,25 +56,25 @@ function TrakNav() {
   }, []);
 
   return (
-    <nav style={{
+    <nav className="trak-nav" style={{
       position: 'sticky', top: 0, zIndex: 50,
-      padding: scrolled ? '14px 48px' : '20px 48px',
+      padding: scrolled ? '14px clamp(16px,4vw,48px)' : '20px clamp(16px,4vw,48px)',
       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       background: scrolled ? 'rgba(13,6,8,0.92)' : 'transparent',
       backdropFilter: scrolled ? 'blur(20px)' : 'none',
       borderBottom: scrolled ? `1px solid ${LINE}` : 'none',
       transition: 'all 0.35s ease',
     }}>
-      <div style={{ fontFamily: DISPLAY, fontSize: 22, letterSpacing: '0.04em', display: 'flex', alignItems: 'center', gap: 10 }}>
+      <div style={{ fontFamily: DISPLAY, fontSize: 22, letterSpacing: '0.04em', display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
         <span style={{ width: 10, height: 10, borderRadius: '50%', background: LIME, boxShadow: `0 0 20px ${LIME}60`, display: 'inline-block' }} />
         Trak<span style={{ color: LIME }}>/</span>Fitness
       </div>
-      <div style={{ display: 'flex', gap: 28 }}>
+      <div className="trak-nav-links" style={{ display: 'flex', gap: 28 }}>
         {['Why Trak', 'Journey', 'Coaches', 'Join'].map((l) => (
           <span key={l} style={{ fontFamily: MONO, fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', color: DIM, cursor: 'pointer' }}>{l}</span>
         ))}
       </div>
-      <div style={{ fontFamily: MONO, fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', padding: '10px 18px', background: LIME, color: INK, fontWeight: 600, cursor: 'pointer' }}>
+      <div className="trak-nav-cta" style={{ fontFamily: MONO, fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', padding: '10px 18px', background: LIME, color: INK, fontWeight: 600, cursor: 'pointer', flexShrink: 0 }}>
         Book a Visit →
       </div>
     </nav>
@@ -84,7 +84,7 @@ function TrakNav() {
 /* ─── Urgency bar ───────────────────────────────────────────── */
 function UrgencyBar() {
   return (
-    <div style={{ background: LIME, padding: '10px 48px', display: 'flex', gap: 32, alignItems: 'center', flexWrap: 'wrap' }}>
+    <div className="trak-urgency-bar" style={{ background: LIME, padding: '10px clamp(16px,4vw,48px)', display: 'flex', gap: 32, alignItems: 'center', flexWrap: 'wrap' }}>
       {[
         <><span style={{ fontFamily: MONO, fontSize: 11 }}>●</span> <strong>15</strong> free trial slots left this week</>,
         <>Next intake starts <strong>Monday</strong></>,
@@ -163,12 +163,13 @@ function StatsStrip() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <div ref={ref} style={{ borderTop: `1px solid ${LINE}`, borderBottom: `1px solid ${LINE}`, display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
+    <div ref={ref} className="trak-stats-grid" style={{ borderTop: `1px solid ${LINE}`, borderBottom: `1px solid ${LINE}`, display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
       {stats.map((s, i) => (
         <motion.div key={s.label}
           initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: i * 0.1, ease: [0.2, 0.8, 0.2, 1] }}
-          style={{ padding: '36px 48px', borderRight: i < 3 ? `1px solid ${LINE}` : 'none', textAlign: i === 0 ? 'left' : 'center' }}
+          className="trak-stats-cell"
+          style={{ padding: '36px clamp(16px,4vw,48px)', borderRight: i < 3 ? `1px solid ${LINE}` : 'none', textAlign: i === 0 ? 'left' : 'center' }}
         >
           <div style={{ fontFamily: DISPLAY, fontSize: 'clamp(40px,5vw,64px)', lineHeight: 1, color: i % 2 === 0 ? LIME : INK }}>{s.val}</div>
           <div style={{ fontFamily: MONO, fontSize: 10, color: DIM, letterSpacing: '0.16em', textTransform: 'uppercase', marginTop: 8 }}>{s.label}</div>
@@ -361,7 +362,7 @@ function TrakMembership() {
         </h2>
       </Reveal>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 64, alignItems: 'start' }}>
+      <div className="trak-membership-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 64, alignItems: 'start' }}>
         <Reveal delay={0.1}>
           <h3 style={{ fontFamily: DISPLAY, fontSize: 'clamp(32px,4vw,56px)', textTransform: 'uppercase', lineHeight: 0.95, marginBottom: 24 }}>
             Personal coaching<br />is <span style={{ color: LIME }}>capped.</span><br />On purpose.
@@ -465,6 +466,18 @@ export function TrakFitnessDesign() {
         @keyframes trakPulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
         @keyframes trakMarquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
         .trak-scroll-container { overflow-y:auto; height:100%; }
+        @media (max-width:767px) {
+          .trak-nav { padding:12px 16px !important; }
+          .trak-nav-links { display:none !important; }
+          .trak-stats-grid { grid-template-columns:repeat(2,1fr) !important; }
+          .trak-stats-cell { padding:20px 16px !important; text-align:center !important; }
+          .trak-urgency-bar { padding:8px 16px !important; gap:12px !important; }
+          .trak-membership-grid { gap:24px !important; }
+        }
+        @media (max-width:479px) {
+          .trak-nav-cta { display:none !important; }
+          .trak-stats-cell { padding:16px 10px !important; }
+        }
       `}</style>
 
       <TrakNav />

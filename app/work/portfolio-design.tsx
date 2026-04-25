@@ -184,7 +184,7 @@ function ProjectModal({ p, onClose, onNav }: { p: PortfolioProject; onClose: () 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
       onClick={onClose}
-      style={{ position: 'fixed', inset: 0, zIndex: 400, background: 'rgba(10,10,10,0.92)', backdropFilter: 'blur(8px)', overflowY: 'auto', padding: '60px 20px' }}
+      style={{ position: 'fixed', inset: 0, zIndex: 400, background: 'rgba(10,10,10,0.92)', backdropFilter: 'blur(8px)', overflowY: 'auto', padding: 'clamp(16px,6vw,60px) clamp(10px,3vw,20px)' }}
     >
       <motion.div
         initial={{ opacity: 0, y: 32, scale: 0.98 }}
@@ -296,7 +296,7 @@ export function AKNPortfolioDesign({ works }: { works: Work[] }) {
 
       {/* HERO */}
       <section style={{ minHeight: '100vh', padding: 'clamp(24px, 4vw, 56px)', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: MONO, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: MUTED }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: MONO, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: MUTED, flexWrap: 'wrap', gap: 8 }}>
           <span style={{ color: FG }}>Aspire Kinetic Network <span style={{ color: LIME }}>/</span> Work</span>
           <span>Portfolio · 2026</span>
         </div>

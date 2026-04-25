@@ -140,7 +140,7 @@ export function SiteNav() {
       </a>
 
       <nav
-        className={`fixed left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'top-3 sm:top-4' : 'top-4 sm:top-6'}`}
+        className={`fixed left-0 right-0 z-50 px-3 sm:px-4 lg:px-6 xl:px-0 transition-all duration-500 ${scrolled ? 'top-3 sm:top-4' : 'top-4 sm:top-6'}`}
         aria-label="Primary"
       >
         <div
