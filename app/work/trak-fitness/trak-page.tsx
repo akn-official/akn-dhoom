@@ -764,7 +764,6 @@ export function TrakFitnessPage() {
 
   return (
     <div id="trak-root">
-      {/* eslint-disable-next-line react/no-danger */}
       <style dangerouslySetInnerHTML={{ __html: TRAK_CSS }} />
       <UrgencyBar />
       <TrakNav />
