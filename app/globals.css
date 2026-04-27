@@ -141,8 +141,14 @@
 }
 
 /* Cursor-none class - only applied via JS on non-touch devices */
-.cursor-none, .cursor-none * {
+.cursor-none {
+  cursor: none;
+}
+.cursor-none *:not(input):not(textarea):not(select):not([contenteditable="true"]) {
   cursor: none !important;
+}
+.cursor-none :is(input, textarea, select, [contenteditable="true"]) {
+  cursor: text !important;
 }
 
 /* Balance multiline headings on large screens for cleaner wrap */

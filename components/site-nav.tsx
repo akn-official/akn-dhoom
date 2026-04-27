@@ -128,8 +128,8 @@ export function SiteNav() {
     router.push('/claim');
   };
 
-  // Admin + portal have their own headers — hide the public nav there.
-  if (pathname.startsWith('/admin') || pathname.startsWith('/portal')) {
+  // Admin, portal, and Trak microsite have their own headers.
+  if (pathname.startsWith('/admin') || pathname.startsWith('/portal') || pathname === '/work/trak-fitness') {
     return null;
   }
 

@@ -59,7 +59,7 @@ export const ServiceCard = forwardRef<HTMLDivElement, ServiceCardProps>(({ servi
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
-      className="h-full"
+
     >
       <Card
         onMouseMove={handleMouseMove}
@@ -70,7 +70,7 @@ export const ServiceCard = forwardRef<HTMLDivElement, ServiceCardProps>(({ servi
         aria-expanded={isExpanded}
         aria-label={`${service.title} - click to ${isExpanded ? 'collapse' : 'expand'} details`}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setIsExpanded(!isExpanded); } }}
-        className="relative bg-zinc-900/50 border-zinc-800 hover:border-[#2A8B9D] focus-visible:border-[#2A8B9D] focus-visible:ring-2 focus-visible:ring-[#2A8B9D] focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 focus-visible:outline-none transition-colors group backdrop-blur-sm overflow-hidden h-full cursor-pointer flex flex-col"
+        className="relative bg-zinc-900/50 border-zinc-800 hover:border-[#2A8B9D] focus-visible:border-[#2A8B9D] focus-visible:ring-2 focus-visible:ring-[#2A8B9D] focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 focus-visible:outline-none transition-colors group backdrop-blur-sm overflow-hidden cursor-pointer flex flex-col"
       >
         {/* Branded gradient background with Parallax */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

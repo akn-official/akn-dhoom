@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { AKNPortfolioDesign } from './portfolio-design';
 import { TrakFitnessDesign } from './trak-fitness';
@@ -12,6 +13,7 @@ interface PortfolioSite {
   tag: string;
   year: string;
   url: string;
+  href?: string;
   ph: { bg: string; stripe: string; ink: string; angle: number; gap: number };
 }
 
@@ -30,6 +32,7 @@ const PORTFOLIO_SITES: PortfolioSite[] = [
     tag: 'Gym · Chennai',
     year: '2025',
     url: 'trakfitness.in',
+    href: '/work/trak-fitness',
     ph: { bg: '#0D0608', stripe: '#9B2335', ink: '#F5EFE4', angle: 45, gap: 10 },
   },
 ];
@@ -69,14 +72,16 @@ function SitePreview({ ph, id }: { ph: PortfolioSite['ph']; id: string }) {
 
 function BrowserCard({ site, onOpen }: { site: PortfolioSite; onOpen: () => void }) {
   const [hovered, setHovered] = useState(false);
+  const router = useRouter();
+  const handleClick = () => site.href ? router.push(site.href) : onOpen();
   return (
     <motion.div
       data-browser-card
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
-      onClick={onOpen}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); } }}
+      onClick={handleClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       role="button"
@@ -207,7 +212,7 @@ export function WorkPageContent({ works }: { works: Work[] }) {
   return (
     <div id="main-content" className="min-h-screen bg-[#0A0F1C] text-zinc-50">
       {/* Ambient glows */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden -z-10" aria-hidden>
+      <div className="pointer-events-none fixed inset-0 overflow-hidden z-0" aria-hidden>
         <div className="absolute top-1/4 -left-40 w-[600px] h-[600px] rounded-full bg-[#2A8B9D]/6 blur-[120px]" />
         <div className="absolute bottom-1/3 -right-40 w-[500px] h-[500px] rounded-full bg-[#C87A4F]/5 blur-[100px]" />
       </div>

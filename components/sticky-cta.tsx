@@ -19,7 +19,8 @@ export function StickyCta() {
     pathname.startsWith('/admin') ||
     pathname.startsWith('/portal') ||
     pathname === '/privacy' ||
-    pathname === '/terms';
+    pathname === '/terms' ||
+    pathname === '/work/trak-fitness';
 
   useEffect(() => {
     setMounted(true);

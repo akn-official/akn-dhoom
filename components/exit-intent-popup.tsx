@@ -7,7 +7,7 @@ import { createClient } from '@/lib/supabase/client';
 import { events } from '@/lib/analytics';
 
 const STORAGE_KEY = 'akn-exit-popup';
-const SUPPRESSED_PATHS = ['/admin', '/claim', '/portal'];
+const SUPPRESSED_PATHS = ['/admin', '/claim', '/portal', '/work/trak-fitness'];
 
 export function ExitIntentPopup() {
   const pathname = usePathname();

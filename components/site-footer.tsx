@@ -12,8 +12,8 @@ export function SiteFooter() {
   const t = useTranslations('footer');
   const tNav = useTranslations('nav');
 
-  // Admin + portal have their own shells — no public footer there.
-  if (pathname.startsWith('/admin') || pathname.startsWith('/portal')) {
+  // Admin, portal, and Trak microsite have their own shells.
+  if (pathname.startsWith('/admin') || pathname.startsWith('/portal') || pathname === '/work/trak-fitness') {
     return null;
   }
 
