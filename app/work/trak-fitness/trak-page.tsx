@@ -50,28 +50,54 @@ function UrgencyBar() {
 }
 
 /* ─── TrakNav ────────────────────────────────────────────── */
+const NAV_LINKS = [
+  { href: '#why', label: 'Why Trak' },
+  { href: '#trainers', label: 'Trainers' },
+  { href: '#journey', label: 'Journey' },
+  { href: '#membership', label: 'Membership' },
+  { href: '#location', label: 'Location' },
+];
 function TrakNav() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+  const close = () => setMenuOpen(false);
   return (
-    <nav className={`trak-nav${scrolled ? ' scrolled' : ''}`}>
-      <a href="#" className="trak-logo" style={{ color: 'var(--accent)' }}>
-        <span className="logo-mark" />
-        Trak<span style={{ color: 'var(--accent)' }}>/</span>Fitness
-      </a>
-      <div className="nav-links">
-        <a href="#why">Why Trak</a>
-        <a href="#trainers">Trainers</a>
-        <a href="#journey">Journey</a>
-        <a href="#membership">Membership</a>
-        <a href="#location">Location</a>
+    <>
+      <nav className={`trak-nav${scrolled ? ' scrolled' : ''}`}>
+        <a href="#" className="trak-logo" style={{ color: 'var(--accent)' }}>
+          <span className="logo-mark" />
+          Trak<span style={{ color: 'var(--accent)' }}>/</span>Fitness
+        </a>
+        <div className="nav-links">
+          {NAV_LINKS.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
+        </div>
+        <a href="#membership" className="nav-cta">Book a Visit →</a>
+        <button
+          className={`nav-hamburger${menuOpen ? ' open' : ''}`}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
+        >
+          <span /><span /><span />
+        </button>
+      </nav>
+      <div className={`nav-mobile-menu${menuOpen ? ' open' : ''}`} aria-hidden={!menuOpen}>
+        <button className="nav-mobile-close" onClick={close} aria-label="Close menu">× Close</button>
+        {NAV_LINKS.map((l) => (
+          <a key={l.href} href={l.href} onClick={close}>{l.label}</a>
+        ))}
+        <a href="#membership" className="nav-mobile-cta" onClick={close}>Book a Visit →</a>
       </div>
-      <a href="#membership" className="nav-cta">Book a Visit →</a>
-    </nav>
+    </>
   );
 }
 
@@ -144,7 +170,7 @@ function Hero() {
           </div>
         </div>
         <div className="hero-scroll hero-anim" style={{ '--d': '800ms' } as React.CSSProperties}>
-          <span className="scroll-line" /><span>Scroll · 01 / 12</span>
+          <span className="scroll-line" /><span>Scroll · 01 / 14</span>
         </div>
       </div>
     </section>
@@ -240,7 +266,7 @@ function Results() {
     <section className="section" id="results">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent-deep)' }}>05 / Real Transformations</div>
+          <div className="mono" style={{ color: 'var(--accent-deep)' }}>04 / Real Transformations</div>
           <div>
             <h2 className="display section-title">Real people.<br /><span style={{ color: 'var(--burgundy)' }}>Real weeks.</span><br />Real change.</h2>
             <p style={{ marginTop: 24, color: 'var(--ink-dim)', maxWidth: 540, lineHeight: 1.55, fontSize: 17 }}>These aren&apos;t crash stories. This is what happens when someone keeps showing up — with a coach keeping pace.</p>
@@ -317,7 +343,7 @@ function Trainers() {
     <section className="section section-alt" id="trainers">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent-deep)' }}>07 / Your Coach</div>
+          <div className="mono" style={{ color: 'var(--accent-deep)' }}>08 / Your Coach</div>
           <div>
             <h2 className="display section-title">The people<br />who will<br /><span style={{ color: 'var(--burgundy)' }}>have your back.</span></h2>
             <p style={{ marginTop: 24, color: 'var(--ink-dim)', maxWidth: 540, lineHeight: 1.55, fontSize: 17 }}>Tap any coach to hear them in their own words. You pick who you vibe with. They&apos;ll pick you up when you stall.</p>
@@ -356,7 +382,7 @@ function Why() {
     <section className="section" id="why">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent-deep)' }}>06 / Why Trak</div>
+          <div className="mono" style={{ color: 'var(--accent-deep)' }}>07 / Why Trak</div>
           <h2 className="display section-title">Most gyms<br />sell <span style={{ color: 'var(--ink-dim)' }}>access.</span><br />We sell <span style={{ color: 'var(--burgundy)' }}>change.</span></h2>
         </div>
         <div className="why-grid">
@@ -399,7 +425,7 @@ function Journey() {
     <section className="section journey" id="journey" ref={ref}>
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent)' }}>05 / Method</div>
+          <div className="mono" style={{ color: 'var(--accent)' }}>09 / Method</div>
           <h2 className="display section-title">From doubt<br />to <span style={{ color: 'var(--accent)' }}>done.</span></h2>
         </div>
         <div className="journey-steps" style={{ '--journey-progress': `${progress}%` } as React.CSSProperties}>
@@ -423,7 +449,7 @@ function Experience() {
     <section className="section" id="experience">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent)' }}>06 / The Floor</div>
+          <div className="mono" style={{ color: 'var(--accent)' }}>10 / The Floor</div>
           <h2 className="display section-title">The space<br />does its <span style={{ color: 'var(--accent)' }}>job.</span></h2>
         </div>
         <div className="exp-grid">
@@ -449,7 +475,7 @@ function Membership() {
     <section className="section" id="membership">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent)' }}>07 / Join</div>
+          <div className="mono" style={{ color: 'var(--accent)' }}>11 / Join</div>
           <h2 className="display section-title">Good coaches<br />don&apos;t <span style={{ color: 'var(--accent)' }}>scale.</span></h2>
         </div>
         <div className="membership">
@@ -496,7 +522,7 @@ function LeadForm() {
       <div className="container">
         <div className="lead-wrap">
           <div className="lead-left">
-            <div className="mono" style={{ color: 'var(--accent-deep)', marginBottom: 16 }}>04 / Your Plan</div>
+            <div className="mono" style={{ color: 'var(--accent-deep)', marginBottom: 16 }}>05 / Your Plan</div>
             <h2 className="display lead-title">Get a free<br /><span style={{ color: 'var(--burgundy)' }}>personalized</span><br />fitness plan in <span className="lead-accent">24 hours.</span></h2>
             <p className="lead-sub">Tell us three things. A coach reviews your goal, maps a 30-day starting plan, and sends it to your WhatsApp — no sales calls, no pressure.</p>
             <ul className="lead-bullets">
@@ -516,12 +542,12 @@ function LeadForm() {
                   <div className="mono" style={{ color: 'rgba(245,239,228,0.5)' }}>~ 30 seconds</div>
                 </div>
                 <div className="lead-field">
-                  <label>Your name</label>
-                  <input type="text" placeholder="e.g. Priya" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
+                  <label htmlFor="trak-name">Your name</label>
+                  <input id="trak-name" type="text" placeholder="e.g. Priya" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
                 </div>
                 <div className="lead-field">
-                  <label>Phone / WhatsApp</label>
-                  <input type="tel" placeholder="+91 ••••• •••••" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} required />
+                  <label htmlFor="trak-phone">Phone / WhatsApp</label>
+                  <input id="trak-phone" type="tel" placeholder="+91 ••••• •••••" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} required />
                 </div>
                 <div className="lead-field">
                   <label>Primary goal</label>
@@ -555,7 +581,7 @@ function Location() {
     <section className="section" id="location">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent-deep)' }}>10 / Find Us</div>
+          <div className="mono" style={{ color: 'var(--accent-deep)' }}>13 / Find Us</div>
           <h2 className="display section-title">One of Chennai&apos;s<br /><span style={{ color: 'var(--burgundy)' }}>highest-rated</span> gyms.</h2>
         </div>
         <div className="location-grid">
@@ -591,7 +617,7 @@ function FinalCTA() {
   return (
     <section className="final-cta">
       <div className="container">
-        <div className="mono" style={{ color: 'var(--accent)', marginBottom: 32 }}>09 / The Decision</div>
+        <div className="mono" style={{ color: 'var(--accent)', marginBottom: 32 }}>14 / The Decision</div>
         <h2><div className="line-1"><span className="stroke">Stop</span> waiting.</div><div className="line-2">Start becoming.</div></h2>
         <p className="final-cta-sub">The version of you that walks out of here in six months — they started today. Not Monday. Not next month. Today.</p>
         <div className="final-cta-actions">
@@ -633,6 +659,13 @@ function TrakFooter() {
 }
 
 /* ─── WhatsAppFloat ──────────────────────────────────────── */
+function WaIcon() {
+  return (
+    <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden>
+      <path d="M16 3C9 3 3.3 8.7 3.3 15.7c0 2.5.7 4.8 1.9 6.8L3 29l6.7-2.1c1.9 1 4 1.6 6.3 1.6 7 0 12.7-5.7 12.7-12.7S23 3 16 3zm0 23c-2 0-4-.6-5.7-1.6l-.4-.2-4 1.2 1.3-3.9-.3-.4C5.7 19.4 5 17.6 5 15.7 5 9.7 9.9 4.8 16 4.8s11 4.9 11 11c0 6-4.9 10.9-11 10.9zm6-8.2c-.3-.2-2-.9-2.3-1-.3-.1-.5-.2-.8.2-.2.3-.9 1-1.1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.6-1-.9-1.7-1.9-1.9-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.8-1.8-1-2.5-.3-.7-.5-.6-.8-.6h-.7c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 3 1.2 3.2c.1.2 2.1 3.2 5.2 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-.1.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.3z" />
+    </svg>
+  );
+}
 function WhatsAppFloat() {
   const [show, setShow] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -640,11 +673,6 @@ function WhatsAppFloat() {
     const t = setTimeout(() => setShow(true), 1800);
     return () => clearTimeout(t);
   }, []);
-  const WaIcon = () => (
-    <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden>
-      <path d="M16 3C9 3 3.3 8.7 3.3 15.7c0 2.5.7 4.8 1.9 6.8L3 29l6.7-2.1c1.9 1 4 1.6 6.3 1.6 7 0 12.7-5.7 12.7-12.7S23 3 16 3zm0 23c-2 0-4-.6-5.7-1.6l-.4-.2-4 1.2 1.3-3.9-.3-.4C5.7 19.4 5 17.6 5 15.7 5 9.7 9.9 4.8 16 4.8s11 4.9 11 11c0 6-4.9 10.9-11 10.9zm6-8.2c-.3-.2-2-.9-2.3-1-.3-.1-.5-.2-.8.2-.2.3-.9 1-1.1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.6-1-.9-1.7-1.9-1.9-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.8-1.8-1-2.5-.3-.7-.5-.6-.8-.6h-.7c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 3 1.2 3.2c.1.2 2.1 3.2 5.2 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-.1.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.3z" />
-    </svg>
-  );
   return (
     <div className={`wa-float${show ? ' show' : ''}${expanded ? ' expanded' : ''}`}>
       {expanded && (
@@ -786,7 +814,7 @@ export function TrakFitnessPage() {
       <ParallaxBand
         image="/trak-fitness/manga-warrior.jpg"
         label="The Method"
-        num="08"
+        num="12"
         quote="One coach. One plan. One hour a day. That's all it takes."
       />
       <Location />

@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { AKNPortfolioDesign } from './portfolio-design';
-import { TrakFitnessDesign } from './trak-fitness';
 import type { Work } from '@/lib/supabase/types';
 
 interface PortfolioSite {
@@ -175,7 +174,6 @@ function DesignModal({ site, works, onClose }: { site: PortfolioSite; works: Wor
         className="flex-1 overflow-y-auto"
       >
         {site.id === 'akn-portfolio' && <AKNPortfolioDesign works={works} />}
-        {site.id === 'trak-fitness' && <TrakFitnessDesign />}
       </motion.div>
     </motion.div>
   );
