@@ -170,7 +170,7 @@ function Hero() {
           </div>
         </div>
         <div className="hero-scroll hero-anim" style={{ '--d': '800ms' } as React.CSSProperties}>
-          <span className="scroll-line" /><span>Scroll · 01 / 14</span>
+          <span className="scroll-line" /><span>Scroll</span>
         </div>
       </div>
     </section>
@@ -195,7 +195,7 @@ function TrakMarquee() {
 }
 
 /* ─── ParallaxBand ───────────────────────────────────────── */
-function ParallaxBand({ image, label, num, quote }: { image: string; label: string; num: string; quote: string }) {
+function ParallaxBand({ image, label, num, quote }: { image: string; label: string; num: string; quote: React.ReactNode }) {
   const ref = useRef<HTMLElement>(null);
   const [y, setY] = useState(0);
   useEffect(() => {
@@ -266,7 +266,7 @@ function Results() {
     <section className="section" id="results">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent-deep)' }}>04 / Real Transformations</div>
+          <div className="mono" style={{ color: 'var(--accent-deep)' }}>05 / Real Transformations</div>
           <div>
             <h2 className="display section-title">Real people.<br /><span style={{ color: 'var(--burgundy)' }}>Real weeks.</span><br />Real change.</h2>
             <p style={{ marginTop: 24, color: 'var(--ink-dim)', maxWidth: 540, lineHeight: 1.55, fontSize: 17 }}>These aren&apos;t crash stories. This is what happens when someone keeps showing up — with a coach keeping pace.</p>
@@ -343,7 +343,7 @@ function Trainers() {
     <section className="section section-alt" id="trainers">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent-deep)' }}>08 / Your Coach</div>
+          <div className="mono" style={{ color: 'var(--accent-deep)' }}>07 / Your Coach</div>
           <div>
             <h2 className="display section-title">The people<br />who will<br /><span style={{ color: 'var(--burgundy)' }}>have your back.</span></h2>
             <p style={{ marginTop: 24, color: 'var(--ink-dim)', maxWidth: 540, lineHeight: 1.55, fontSize: 17 }}>Tap any coach to hear them in their own words. You pick who you vibe with. They&apos;ll pick you up when you stall.</p>
@@ -382,7 +382,7 @@ function Why() {
     <section className="section" id="why">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent-deep)' }}>07 / Why Trak</div>
+          <div className="mono" style={{ color: 'var(--accent-deep)' }}>06 / Why Trak</div>
           <h2 className="display section-title">Most gyms<br />sell <span style={{ color: 'var(--ink-dim)' }}>access.</span><br />We sell <span style={{ color: 'var(--burgundy)' }}>change.</span></h2>
         </div>
         <div className="why-grid">
@@ -425,7 +425,7 @@ function Journey() {
     <section className="section journey" id="journey" ref={ref}>
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent)' }}>09 / Method</div>
+          <div className="mono" style={{ color: 'var(--accent)' }}>05 / Method</div>
           <h2 className="display section-title">From doubt<br />to <span style={{ color: 'var(--accent)' }}>done.</span></h2>
         </div>
         <div className="journey-steps" style={{ '--journey-progress': `${progress}%` } as React.CSSProperties}>
@@ -449,7 +449,7 @@ function Experience() {
     <section className="section" id="experience">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent)' }}>10 / The Floor</div>
+          <div className="mono" style={{ color: 'var(--accent)' }}>06 / The Floor</div>
           <h2 className="display section-title">The space<br />does its <span style={{ color: 'var(--accent)' }}>job.</span></h2>
         </div>
         <div className="exp-grid">
@@ -475,7 +475,7 @@ function Membership() {
     <section className="section" id="membership">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent)' }}>11 / Join</div>
+          <div className="mono" style={{ color: 'var(--accent)' }}>07 / Join</div>
           <h2 className="display section-title">Good coaches<br />don&apos;t <span style={{ color: 'var(--accent)' }}>scale.</span></h2>
         </div>
         <div className="membership">
@@ -522,7 +522,7 @@ function LeadForm() {
       <div className="container">
         <div className="lead-wrap">
           <div className="lead-left">
-            <div className="mono" style={{ color: 'var(--accent-deep)', marginBottom: 16 }}>05 / Your Plan</div>
+            <div className="mono" style={{ color: 'var(--accent-deep)', marginBottom: 16 }}>04 / Your Plan</div>
             <h2 className="display lead-title">Get a free<br /><span style={{ color: 'var(--burgundy)' }}>personalized</span><br />fitness plan in <span className="lead-accent">24 hours.</span></h2>
             <p className="lead-sub">Tell us three things. A coach reviews your goal, maps a 30-day starting plan, and sends it to your WhatsApp — no sales calls, no pressure.</p>
             <ul className="lead-bullets">
@@ -581,7 +581,7 @@ function Location() {
     <section className="section" id="location">
       <div className="container">
         <div className="section-head">
-          <div className="mono" style={{ color: 'var(--accent-deep)' }}>13 / Find Us</div>
+          <div className="mono" style={{ color: 'var(--accent-deep)' }}>10 / Find Us</div>
           <h2 className="display section-title">One of Chennai&apos;s<br /><span style={{ color: 'var(--burgundy)' }}>highest-rated</span> gyms.</h2>
         </div>
         <div className="location-grid">
@@ -617,7 +617,7 @@ function FinalCTA() {
   return (
     <section className="final-cta">
       <div className="container">
-        <div className="mono" style={{ color: 'var(--accent)', marginBottom: 32 }}>14 / The Decision</div>
+        <div className="mono" style={{ color: 'var(--accent)', marginBottom: 32 }}>09 / The Decision</div>
         <h2><div className="line-1"><span className="stroke">Stop</span> waiting.</div><div className="line-2">Start becoming.</div></h2>
         <p className="final-cta-sub">The version of you that walks out of here in six months — they started today. Not Monday. Not next month. Today.</p>
         <div className="final-cta-actions">
@@ -796,27 +796,41 @@ export function TrakFitnessPage() {
       <UrgencyBar />
       <TrakNav />
       <Hero />
-      <TrakMarquee />
-      <Testimonials />
       <ParallaxBand
         image="/trak-fitness/inked-back.jpg"
-        label="The Shift"
-        num="03"
-        quote="The gym you join doesn't matter. The one you show up to does."
+        label="The Discipline You've Been Missing"
+        num="II"
+        quote={
+          <>
+            <span style={{ color: '#F5EFE4' }}>Pain is temporary.</span>
+            <br />
+            <span style={{ color: 'var(--accent)' }}>Quitting lasts forever.</span>
+          </>
+        }
+      />
+      <FreeWorkout />
+      <LeadForm />
+      <Testimonials />
+      <ParallaxBand
+        image="/trak-fitness/manga-warrior.jpg"
+        label="Built Rep by Rep"
+        num="VI"
+        quote={
+          <>
+            <span style={{ color: '#F5EFE4' }}>You don&apos;t </span>
+            <span style={{ color: 'var(--ink-dim)', textDecoration: 'line-through' }}>find</span>
+            <span style={{ color: 'var(--accent)' }}> build</span>
+            <br />
+            <span style={{ color: '#F5EFE4' }}>the body you want.</span>
+          </>
+        }
       />
       <Results />
-      <LeadForm />
-      <FreeWorkout />
+      <Trainers />
       <Why />
       <Journey />
       <Experience />
       <Membership />
-      <ParallaxBand
-        image="/trak-fitness/manga-warrior.jpg"
-        label="The Method"
-        num="12"
-        quote="One coach. One plan. One hour a day. That's all it takes."
-      />
       <Location />
       <FinalCTA />
       <TrakFooter />
